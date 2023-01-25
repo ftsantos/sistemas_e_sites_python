@@ -1,0 +1,31 @@
+{% extends "template.html" %}
+{% block body %}
+
+<div class="container caixadeexibicaopadding">
+
+        <table class="table table-striped table-responsive table-bordered">
+            <thead class="thead-default">
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.categoria }}</td>
+                    <td>{{ produto.valor }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_produto', id=produto.id )}}"><button type="button" class="btn btn-primary">Editar</button></a>
+                        <a href="{{ url_for('deletar_produto', id=produto.id )}}"> <button type="button" class="btn btn-danger">Deletar</button></a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'template.html' %}
+
+{% block body %}
+<div class="container p-3">
+    <h1>Buscar Produto</h1>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <!--<a class="navbar-brand" href="#">Buscar Usuário</a>-->
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <form method="post" >
+              {{ form_buscar.csrf_token }}
+            <!--<input class="form-control me-2" type="search" placeholder="Digite o Nome do usuário" aria-label="Search">-->
+              <!-- <input class="form-control me-2" type="search" placeholder="{{form_buscar.nome.label}}" aria-label="Search">-->
+
+              <div class="row">
+                  <div class="col-md-4">
+                    {{ form_buscar.nome.label(class="form-control-label") }}
+                  </div>
+                  <div class="col-md-7">
+                        {{ form_buscar.nome(class="form-control me-2") }}
+                  </div>
+                  <div class="col-md-1">
+                       <a class="w-100" href="{{ url_for('buscar_produto')}}">
+                                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                      </a>
+                  </div>
+             </div>
+          </form>
+
+
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- Search -->
+
+    <h1>Produtos Encontrados</h1>
+
+    <div class="container caixadeexibicaopadding">
+
+        <table class="table table-striped table-responsive table-bordered">
+            <thead class="thead-default">
+                <tr>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for produto in lista_produtos %}
+                <tr>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.categoria }}</td>
+                    <td>{{ produto.valor }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_produto', id=produto.id )}}"><button type="button" class="btn btn-primary">Editar</button></a>
+                        <a href="{{ url_for('deletar_produto', id=produto.id )}}"> <button type="button" class="btn btn-danger">Deletar</button></a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+</div>
+
+
+{% endblock %}

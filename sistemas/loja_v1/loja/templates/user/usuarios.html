@@ -1,0 +1,43 @@
+{% extends 'template.html' %}
+
+{% block body %}
+<div class="container p-3">
+    <h1>Usuários</h1>
+
+    {% for usuario in lista_usuarios %}
+        <div class="container mt-5 d-flex justify-content-center">
+
+            <div class="card p-3">
+
+                <div class="d-flex align-items-center">
+                    <div class="image pe-2">
+                <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(usuario.foto_perfil)) }}" class="rounded" width="155" >
+                </div>
+
+                <div class="ml-3 w-100 col-6">
+                    {% if usuario.useradmin %}
+                        <span class="destaquefonte"> Administrador </span>
+                    {% endif %}
+                    <hr>
+                    <h4 class="mb-0 mt-0"> {{ usuario.username }} </h4>
+                    <span> {{ usuario.email }} </span>
+                    <hr>
+                    {% if usuario.ativo %}
+                        <span > Ativo </span>
+                    {% else %}
+                        <span > Inativo </span>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+         </div>
+
+        <hr>
+    {% endfor %}
+</div>
+
+<div class="row mt-5">
+
+</div>
+
+{% endblock %}
